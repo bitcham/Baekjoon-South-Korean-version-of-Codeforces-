@@ -1,48 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
-int n, point, flag = 1;
-string comp;
-
+int n;
+string s, ori_s, pre, suf;
 int main(){
-	ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
 	cin >> n;
-	cin >> comp;
-	
-	
-	point = comp.find('*');
-	
-	for(int i = 0; i < n; i++){
-		string str;
-		cin >> str;
-		
-		if(str.length() < comp.length() - 1){
-			flag = 0;
+	cin >> ori_s;
+	int pos = ori_s.find('*');
+	pre = ori_s.substr(0, pos);
+	suf = ori_s.substr(pos + 1);
+	for (int i = 0; i < n; i++){
+		cin >> s;
+		if(pre.size() + suf.size() > s.size()){
+			cout << "NE" << "\n";
+		}else {
+			if(pre == s.substr(0, pre.size()) && suf == s.substr(s.size() - suf.size())) cout << "DA\n";
+			else cout << "NE\n";
 		}
-		
-		if (flag == 1){
-			for(int j = 0; j < point; j++){
-				if(str[j] != comp[j]){
-					flag = 0;
-					break;
-				}
-			}
-		}
-		
-		if (flag == 1){
-			for(int j = comp.length() - 1, k = str.length() - 1; j > point; j--, k--){
-				if(k < 0 || str[k] != comp[j]){
-					flag = 0;
-					break;
-				}
-			}
-		}
-		if (flag == 1) cout << "DA" << "\n";
-		else cout << "NE" << "\n";
-		flag = 1;
 	}
-	
-	
 	return 0;
 }
