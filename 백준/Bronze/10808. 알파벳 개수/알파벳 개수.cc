@@ -1,17 +1,14 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-string str;
-int cnt[26];
+string s;
+int a[26];
 int main(){
-	ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-	cin >> str;
-	
-	for (char a : str){
-		cnt[a - 'a']++;
+	cin >> s;
+	for(int i = 0; i < s.size(); i++){ 
+		a[s[i] - 97]++;
 	}
-	for(int i = 0; i < 26; i++) cout << cnt[i] << " ";
-	
+	for (int i : a){
+		cout << i << " ";
+	}
 	return 0;
-}
+} 
