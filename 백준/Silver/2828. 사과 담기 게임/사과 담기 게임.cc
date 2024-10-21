@@ -1,24 +1,21 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-int n, m, j, temp, l, r, ret;
+int n, m, j, k, cnt, v, w;
 int main(){
-	cin >> n >> m >> j;
-	l = 1;
-	for(int i = 0; i < j; i++){
-		r = l + m - 1;
-		cin >> temp;
-		if(temp >= l && temp <= r) continue;
-		else{
-			if(temp < l){
-				ret += (l - temp);
-				l = temp;
-			}
-			else if(temp > r){
-				ret += (temp - r);
-				l += (temp - r);
-			}
+	cin >> n >> m;
+	cin >> j;
+	v = 1;
+	while(j--){
+		cin >> k;
+		w = v + m - 1;
+		if(k >= v && k <= w) {
+			continue;
+		}else if(k < v) {
+			cnt += v - k; v = k;
+		}else {
+			cnt += k - w; v += (k - w);
 		}
 	}
-	cout << ret;
+	cout << cnt;
 	return 0;
 }
