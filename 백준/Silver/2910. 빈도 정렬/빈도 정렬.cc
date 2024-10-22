@@ -1,10 +1,10 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 int n, c, a[1004];
 vector<pair<int, int>> v;
 map<int, int> mp, mp_first;
 bool cmp(pair<int, int> a, pair<int, int> b){
-	if(a.first == b. first){
+	if(a.first == b.first){
 		return mp_first[a.second] < mp_first[b.second];
 	}
 	return a.first > b.first;
@@ -24,5 +24,4 @@ int main(){
 			cout << i.second << " ";
 		}
 	}
-	return 0;
 }
