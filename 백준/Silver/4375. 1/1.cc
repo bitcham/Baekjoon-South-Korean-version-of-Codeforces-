@@ -1,20 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-int n;
+int cnt, n, temp;
 int main(){
 	while(scanf("%d", &n) != EOF){
-		ll cnt = 1, ret = 1;
-		while(true){
-			if(cnt % n == 0){
-				printf("%lld\n", ret);
-				break;
-			}else{
-				cnt = (cnt * 10) + 1;
-				ret ++;
-			}
-			cnt = cnt % n;
+		cnt = 1;
+		temp = 1;
+		while(temp % n){
+			cnt++;
+			temp = temp * 10 + 1;
+			temp %= n;
 		}
+		printf("%d\n", cnt);
 	}
 	return 0;
 }
