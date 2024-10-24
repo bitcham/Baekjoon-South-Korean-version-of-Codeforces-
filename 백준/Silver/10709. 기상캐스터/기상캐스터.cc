@@ -1,32 +1,30 @@
 #include<bits/stdc++.h>
 using namespace std;
+int n, m, a[101][101];
 string s;
-int a[101][101], n, m;
 int main(){
-	cin >> n >> m;
+	cin >>n >> m;
 	for(int i = 0; i < n; i++){
 		cin >> s;
 		for(int j = 0; j < m; j++){
 			if(s[j] == '.') a[i][j] = -1;
-			else{
-				a[i][j] = 0;
-			}
+			else a[i][j] = 0;	
 		}
 	}
 	for(int i = 0; i < n; i++){
-		for(int j = 0; j < m; j++){
+		for (int j = 0; j < m; j++){
 			if(a[i][j] == 0){
 				int cnt = 1;
 				while(a[i][j+1] == -1){
-					a[i][j+1] = cnt++;
+					a[i][j+1] = cnt;
 					j++;
+					cnt++;
 				}
 			}
 		}
 	}
-	
 	for(int i = 0; i < n; i++){
-		for(int j = 0; j < m; j++){
+		for (int j = 0; j < m; j++){
 			cout << a[i][j] << " ";
 		}
 		cout << "\n";
