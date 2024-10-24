@@ -2,25 +2,24 @@
 using namespace std;
 int n;
 string s;
-bool checkParen(string s){
-	stack<char> a;
+bool check(){
+	stack<char> v;
 	for(int i = 0; i < s.size(); i++){
-		if(s[i] == '(') a.push(s[i]);
-		else if(s[i] == ')'){
-			if(a.empty()) return false;
-			if(a.top() == '(') a.pop();
-			else{
-				return false;
-			}
+		if(s[i] == '(') v.push(s[i]);
+		else{
+			if(v.empty()) return false;
+			v.pop();
 		}
 	}
-	return a.empty();
+	return v.empty();
 }
 int main(){
 	cin >> n;
-	while(n--){
+	for(int i = 0; i < n; i++){
 		cin >> s;
-		cout << (checkParen(s) ? "YES" : "NO") << "\n";
+		if(check()) cout << "YES" << "\n";
+		else cout << "NO" << "\n";
 	}
+	
 	return 0;
 }
