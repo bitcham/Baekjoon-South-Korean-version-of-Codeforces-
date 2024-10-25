@@ -1,10 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 int a[104][104], visited[104][104];
-int dy[] = {-1, 0, 1, 0};
-int dx[] = { 0, -1, 0, 1};
+int dy[] = {-1, 0, 1 ,0}, dx[] = {0, -1, 0, 1};
 int n, m, cnt, cnt2;
-vector<pair<int, int>>v;
+vector<pair<int, int>> v;
 void go(int y, int x){
 	visited[y][x] = 1;
 	if(a[y][x] == 1){
@@ -20,7 +19,7 @@ void go(int y, int x){
 	return;
 }
 int main(){
-	cin >>n >>m;
+	cin >> n >> m;
 	for(int i = 0; i < n; i++){
 		for(int j = 0; j < m; j++){
 			cin >> a[i][j];
@@ -36,7 +35,7 @@ int main(){
 		}
 		bool flag = 0;
 		for(int i = 0; i < n; i++){
-			for (int j = 0; j < m; j++){
+			for(int j = 0;  j < m; j++){
 				if(a[i][j] != 0) flag = 1;
 			}
 		}
