@@ -1,43 +1,37 @@
-#include <bits/stdc++.h>
-using namespace std;  
-
-vector<int> num; 
-vector<char> oper_str; 
+#include<bits/stdc++.h>
+using namespace std;
+vector<int> _num;
+vector<char> _oper;
+string s;
 int n, ret = -987654321;
-string s; 
-void fastIO(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); 
-    cout.tie(NULL);   
-} 
 int oper(char a, int b, int c){
-    if(a == '+') return b + c; 
-    if(a == '-') return b - c; 
-    if(a == '*') return b * c;  
-} 
-
-void go(int here, int _num){
-    if(here == num.size() - 1){ 
-        ret = max(ret, _num); 
-        return;
-    }  
-    go(here + 1, oper(oper_str[here], _num, num[here + 1]));
-
-    if(here + 2 <= num.size() - 1){
-        int temp = oper(oper_str[here + 1], num[here + 1], num[here + 2]); 
-        go(here + 2, oper(oper_str[here], _num, temp));  
-    } 
-    return;
-} 
+	if(a == '+') return b + c;
+	if(a == '-') return b - c;
+	if(a == '*') return b * c;
+}
+void go(int here, int num){
+	if(here == _num.size() - 1){
+		ret = max(ret, num);
+		return;
+	}
+	
+	go(here + 1, oper(_oper[here], num, _num[here + 1]));
+	if(here + 2 <= _num.size() - 1){
+		int temp = oper(_oper[here + 1], _num[here + 1], _num[here + 2]);
+		go(here + 2, oper(_oper[here], num, temp));
+	}
+	return;
+}
 int main(){
-    fastIO();
-    cin >> n;  
-    cin >> s; 
-    for(int i = 0; i < n; i++){
-        if(i % 2 == 0)num.push_back(s[i] - '0');
-        else oper_str.push_back(s[i]);
-    } 
-    go(0, num[0]);  
-    cout << ret << "\n";
-    return 0;
-} 
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL); 
+    cout.tie(NULL); 
+	cin >> n >> s;
+	for(int i = 0; i < n; i++){
+		if(i % 2 == 0) _num.push_back(s[i] - '0');
+		else _oper.push_back(s[i]);
+	}
+	go(0, _num[0]);
+	cout << ret << "\n";
+	return 0;
+}
