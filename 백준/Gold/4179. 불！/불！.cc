@@ -1,58 +1,62 @@
 #include<bits/stdc++.h>
 using namespace std;
 const int INF = 987654321;
-int r, c, personCheck[1001][1001], fireCheck[1001][1001], sy, sx, y, x, ret;
-char a[1001][1001];
-int dy[] = {-1, 0, 1, 0}, dx[] = {0, -1, 0, 1};
+int n, m, person[1004][1004], fire[1004][1004], y, x, sy, sx, ret;
+string s;
+vector<pair<int, int>> v;
+int dy[] = { -1, 0, 1, 0}, dx[] = { 0, 1, 0, -1};
+char a[1004][1004];
 int main(){
 	ios_base::sync_with_stdio(false);
 	cin.tie(0); cout.tie(0); 
-	queue<pair<int, int>> q;
-	cin >> r >> c;
-	fill(&fireCheck[0][0], &fireCheck[0][0] + 1001 * 1001, INF);
-	for(int i = 0; i < r; i++){
-		for(int j = 0; j < c; j++){
-			cin >> a[i][j];
-			if(a[i][j] == 'F') {
-				fireCheck[i][j] = 1;
-				q.push({i, j});
-			}
+	cin >> n >> m;
+	fill(&fire[0][0], &fire[0][0] + 1004 * 1004, INF);
+	for(int i = 0; i < n; i++){
+		cin >> s;
+		for(int j = 0; j < m; j++){
+			a[i][j] = s[j];
+			if(a[i][j] == 'F') v.push_back({i, j});
 			if(a[i][j] == 'J'){
 				sy = i; sx = j;
 			}
 		}
 	}
-	
+	queue<pair<int, int>> q;
+	for(pair<int, int> it : v){
+		q.push({it.first, it.second});
+		fire[it.first][it.second] = 1;
+	}
 	while(q.size()){
-		tie(y,x) = q.front();q.pop();
+		tie(y, x) = q.front(); q.pop();
 		for(int i = 0; i < 4; i++){
 			int ny = y + dy[i];
 			int nx = x + dx[i];
-			if(ny < 0 || ny >= r || nx < 0 || nx >= c) continue;
-			if(fireCheck[ny][nx] != INF || a[ny][nx] == '#') continue;
-			fireCheck[ny][nx] = fireCheck[y][x] + 1;
+			if(ny >= n || ny < 0 || nx < 0 || nx >= m) continue;
+			if(fire[ny][nx] != INF || a[ny][nx] == '#') continue;
+			fire[ny][nx] = fire[y][x] + 1;
 			q.push({ny, nx});
 		}
 	}
 	q.push({sy, sx});
-	personCheck[sy][sx] = 1;
+	person[sy][sx] = 1;
 	while(q.size()){
 		tie(y, x) = q.front(); q.pop();
-		if(y == 0 || x == 0 || y == r -1 || x == c -1){
-			ret = personCheck[y][x];
+		if(y == 0 || y == n - 1 || x == 0 || x == m -1){
+			ret = person[y][x];
 			break;
 		}
 		for(int i = 0; i < 4; i++){
 			int ny = y + dy[i];
 			int nx = x + dx[i];
-			if(ny < 0 || ny >= r || nx < 0 || nx >= c) continue;
-			if(fireCheck[ny][nx] <= personCheck[y][x] + 1) continue;
-			if(personCheck[ny][nx] != 0 || a[ny][nx] == '#') continue;
-			personCheck[ny][nx] = personCheck[y][x] + 1;
+			if(ny >= n || ny < 0 || nx < 0 || nx >= m) continue;
+			if(person[ny][nx] || a[ny][nx] == '#') continue;
+			if(fire[ny][nx] <= person[y][x] + 1) continue;
+			person[ny][nx] = person[y][x] + 1;
 			q.push({ny, nx});
-		}
+			
+		}	
 	}
-	if(ret != 0) cout << ret;
+	if(ret) cout << ret;
 	else cout << "IMPOSSIBLE";
 	return 0;
 }
