@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 int n, m, a[54][54], result = 987654321;
-vector<vector<int>>chickenList;
+vector<vector<int>> chickenList;
 vector<pair<int, int>> _home, chicken;
-void combi(int start, vector<int> v){
+void combi(int start, vector<int>& v){
 	if(v.size() == m){
 		chickenList.push_back(v);
 		return;
@@ -23,7 +23,6 @@ int main(){
 			if(a[i][j] == 2) chicken.push_back({i, j});
 		}
 	}
-	
 	vector<int> v;
 	combi(-1, v);
 	for(vector<int> cList : chickenList){
@@ -38,6 +37,6 @@ int main(){
 		}
 		result = min(result, ret);
 	}
-	cout << result << "\n";
+	cout << result;
 	return 0;
 }
