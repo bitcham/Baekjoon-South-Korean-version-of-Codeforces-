@@ -1,42 +1,44 @@
 #include<bits/stdc++.h>
-#define prev aaaa
 using namespace std;
 const int MAX = 500000;
-int visited[2][MAX + 4], n, m, turn = 1, ok;
+int n, k, turn = 1, visited[2][MAX + 4], ok;
 int main(){
-	cin >> n >> m;
-	if(n == m){
-		cout << 0; return 0;
+	cin >> n >> k;
+	if(n == k){
+		cout << 0;
+		return 0;
 	}
 	queue<int> q;
-	visited[0][n] = 1;
 	q.push(n);
+	visited[0][n] = 1;
 	while(q.size()){
-		m += turn;
-		if(m > MAX) break;
-		if(visited[turn %2][m]){
-			ok =true;
+		k += turn;
+		if(k > MAX){
+			break;
+		}
+		if(visited[turn % 2][k]) {
+			ok = 1;
 			break;
 		}
 		int qSize = q.size();
-		for(int i = 0; i < qSize; i++){
+		while(qSize--){
 			int x = q.front(); q.pop();
-			for(int num : {x + 1, x - 1, x * 2}){
-				if(0 <= num && num <= MAX){
-					if(visited[turn % 2][num]) continue;
-					visited[turn % 2][num] = visited[(turn + 1) % 2][x] + 1;
-					if(num == m){
-						ok = 1; break;
-					}
-					q.push(num);
+			for(int nx : {x + 1, x - 1, x * 2}){
+				if(nx < 0 || nx > MAX) continue;
+				if(visited[turn % 2][nx]) continue;
+				visited[turn % 2][nx] = visited[(turn + 1) % 2][x] + 1;
+				if(nx == k){
+					ok = 1; break;
 				}
+				q.push(nx);
 			}
-			if(ok)break;
+			if(ok) break;
 		}
-		if(ok)break;
+		if(ok) break;
 		turn++;
 	}
 	if(ok) cout << turn;
 	else cout << -1;
+	
 	return 0;
 }
